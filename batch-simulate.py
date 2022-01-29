@@ -22,14 +22,14 @@ opts, args = getopt.getopt(sys.argv[1:], 'rc:d:t:o:',
 	'output-directory='])
 
 remove_data = False
-cellcount = 5
-density_linspace = [0.8, 0.8, 1]
+cellcount = 10
+density_linspace = [0.2, 1, 5]
 # temperature_linspace = [0.9, 0.9, 1]
-temperature_linspace = [0.1, 0.9, 5]
+temperature_linspace = [0.1, 0.9, 17]
 # temperature_linspace = [0.1, 0.9, 17]
 # temperature_linspace = [0.1, 0.9, 33]
 # temperature_linspace = [0.125, 0.875, 16]
-output_directory = 'data'
+output_directory = 'batch_data'
 
 #print(opts)
 
