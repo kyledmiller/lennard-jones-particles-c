@@ -110,6 +110,9 @@ int main(int argc, char **argv) {
 	
 	final_state_path = (char *) malloc(strlen(output_directory) + 1 + strlen(file_prefix) + 1 + strlen("final_state.csv") + 1);
 	sprintf(final_state_path, "%s/%s/final_state.csv", output_directory, file_prefix);
+
+	init_state_path = (char *) malloc(strlen(output_directory) + 1 + strlen(file_prefix) + 1 + strlen("init_state.csv") + 1);
+	sprintf(init_state_path, "%s/%s/init_state.csv", output_directory, file_prefix);
 	
 	summary_info_path = (char *) malloc(strlen(output_directory) + 1 + strlen(file_prefix) + 1 + strlen("summary_info.csv") + 1);
 	sprintf(summary_info_path, "%s/%s/summary_info.csv", output_directory, file_prefix);
@@ -152,7 +155,8 @@ int main(int argc, char **argv) {
 	Diagnostic();
 	RminCheck();
 	ForceCheck();
-				
+	InitStateToFile();
+
 	printf("Start simulation\n");
 	
 	last_rescale = 0;
@@ -271,6 +275,7 @@ int main(int argc, char **argv) {
 	free(thermo_meas_path);
 	free(time_series_path);
 	free(final_state_path);
+	free(init_state_path);
 	free(summary_info_path);
 	
 	//free(dim_path);
@@ -419,6 +424,47 @@ void FinalStateToFile() {
 	
 	return;
 }
+
+
+/* prints final state to file */
+void InitStateToFile() {
+	FILE *init_state_file;
+	//FILE *summary_info_file;
+	
+	//FILE *dim;
+	
+	//summary_info_file = fopen(summary_info_path, "a");
+	//fprintf(summary_info_file, "%d,%e,%d,%d,%d,%e\n",
+		//CellCount,
+		//L_s,
+		//AtomCount,
+		//BlockCount,
+		//BlocksPerSide,
+		//BlockSize);
+	//fclose(summary_info_file);
+	
+	//dim = fopen(dim_path, "w");
+	//fprintf(dim, "%e\n", L_s);
+	//fclose(dim);
+	
+	init_state_file = fopen(init_state_path, "a");
+	
+	if(init_state_file == NULL) {
+		printf("Cannot open %s\n", init_state_path);
+	}
+	
+	for (int i=0; i < AtomCount; i++) {
+		fprintf(init_state_file, "%e,%e,%e,%e,%e,%e,%e\n",
+			R[i][x], R[i][y], R[i][z],
+			V[i][x], V[i][y], V[i][z],
+			sqrt(V[i][x] * V[i][x] + V[i][y] * V[i][y] + V[i][z] * V[i][z]) );
+	}
+	
+	fclose(init_state_file);
+	
+	return;
+}
+
 
 /* prints out all positions to file */
 //void PositionsToFile() {

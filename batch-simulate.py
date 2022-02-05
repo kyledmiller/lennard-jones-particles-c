@@ -15,6 +15,9 @@ import getopt
 import ast
 import numpy as np
 import pandas as pd
+import time
+
+start = time.time()
 
 # Get options
 opts, args = getopt.getopt(sys.argv[1:], 'rc:d:t:o:',
@@ -22,14 +25,16 @@ opts, args = getopt.getopt(sys.argv[1:], 'rc:d:t:o:',
 	'output-directory='])
 
 remove_data = False
-cellcount = 10
-density_linspace = [0.2, 1, 5]
+cellcount = 6
+density_linspace = [0.8, 1, 1]
+#density_linspace = [0.2, 1, 5]
 # temperature_linspace = [0.9, 0.9, 1]
-temperature_linspace = [0.1, 0.9, 17]
+temperature_linspace = [0.2, 0.8, 1]
+#temperature_linspace = [0.2, 0.8, 4]
 # temperature_linspace = [0.1, 0.9, 17]
 # temperature_linspace = [0.1, 0.9, 33]
 # temperature_linspace = [0.125, 0.875, 16]
-output_directory = 'batch_data'
+output_directory = f'test_data_cellcount_{cellcount}'
 
 #print(opts)
 
@@ -136,3 +141,5 @@ for rho in densities:
 		os.system(cmd)
 
 # os.system('./md-simulate --cellcount 5 --density 0.8 --temperature 0.9 --output-directory data --prefix T0.9')
+
+print(time.time()-start)

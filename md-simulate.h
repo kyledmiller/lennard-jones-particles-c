@@ -53,6 +53,7 @@ char *file_prefix; /* prefix to attach to files unique to this run */
 
 char *time_series_path; /* path to relevant data as a function of time */
 char *final_state_path; /* path to final state data */
+char *init_state_path; /* path to final state data */
 char *thermo_meas_path; /* path to thermo measurements as a function of temperature */
 char *summary_info_path; /* basic info like box size and number of particles */
 
@@ -203,6 +204,7 @@ void SpeedCheck();
 
 /* prints out final state to file */
 void FinalStateToFile();
+void InitStateToFile();
 
 /* print summary info to file */
 void SummaryInfoToFile();
